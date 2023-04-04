@@ -20,6 +20,11 @@
                 placeholder="John M. Doe"
               />
 
+                 <p v-if="errorsEmail.length">    
+                <ul class="ul-error">
+                  <li v-for="error in errorsEmail" >{{ error }}</li>
+                </ul></p>
+
               <label for="email"><i class="fa fa-envelope"></i> Email</label>
               <input
                 type="text"
@@ -29,6 +34,12 @@
                 @focus="deleteErrors('email')"
                 placeholder="john@example.com"
               />
+
+             <p v-if="errorsEmail.length">    
+                <ul class="ul-error">
+                  <li v-for="error in errorsEmail" >{{ error }}</li>
+                </ul></p>
+
               <label for="adr"
                 ><i class="fa fa-address-card-o"></i> Address</label
               >
@@ -40,6 +51,10 @@
                 name="address"
                 placeholder="542 W. 15th Street"
               />
+               <p v-if="errorsEmail.length">    
+                <ul class="ul-error">
+                  <li v-for="error in errorsEmail" >{{ error }}</li>
+                </ul></p>
               <label for="city"><i class="fa fa-institution"></i> City</label>
               <input
                 v-model="city"
@@ -49,6 +64,10 @@
                 name="city"
                 placeholder="New York"
               />
+               <p v-if="errorsEmail.length">    
+                <ul class="ul-error">
+                  <li v-for="error in errorsEmail" >{{ error }}</li>
+                </ul></p>
 
               <div class="row">
                 <div class="col-50">
@@ -61,6 +80,10 @@
                     @focus="deleteErrors('state')"
                     placeholder="NY"
                   />
+                   <p v-if="errorsEmail.length">    
+                <ul class="ul-error">
+                  <li v-for="error in errorsEmail" >{{ error }}</li>
+                </ul></p>
                 </div>
                 <div class="col-50">
                   <label for="zip">Zip</label>
@@ -72,6 +95,10 @@
                     name="zip"
                     placeholder="10001"
                   />
+                   <p v-if="errorsEmail.length">    
+                <ul class="ul-error">
+                  <li v-for="error in errorsEmail" >{{ error }}</li>
+                </ul></p>
                 </div>
               </div>
             </div>
@@ -94,6 +121,10 @@
                 @focus="deleteErrors('nameOnCard')"
                 placeholder="John More Doe"
               />
+               <p v-if="errorsEmail.length">    
+                <ul class="ul-error">
+                  <li v-for="error in errorsEmail" >{{ error }}</li>
+                </ul></p>
               <label for="ccnum">Credit card number</label>
               <input
                 type="text"
@@ -103,6 +134,10 @@
                 @focus="deleteErrors('credit_card_number')"
                 placeholder="1111-2222-3333-4444"
               />
+              <p v-if="errorsCreditCartNumber.length">    
+                <ul class="ul-error">
+                  <li v-for="error in errorsCreditCartNumber" >{{ error }}</li>
+                </ul></p>
               <label for="expmonth">Exp Month</label>
               <input
                 type="text"
@@ -112,6 +147,10 @@
                 @focus="deleteErrors('expMonth')"
                 placeholder="September"
               />
+               <p v-if="errorsExpMonth.length">    
+                <ul class="ul-error">
+                  <li v-for="error in errorsExpMonth" >{{ error }}</li>
+                </ul></p>
               <div class="row">
                 <div class="col-50">
                   <label for="expyear">Exp Year</label>
@@ -123,6 +162,10 @@
                     @focus="deleteErrors('expYear')"
                     placeholder="2018"
                   />
+                   <p v-if="errorsExpYear.length">    
+                <ul class="ul-error">
+                  <li v-for="error in errorsExpYear" >{{ error }}</li>
+                </ul></p>
                 </div>
                 <div class="col-50">
                   <label for="cvv">CVV</label>
@@ -134,6 +177,10 @@
                     name="cvv"
                     placeholder="352"
                   />
+                   <p v-if="errorsCVV.length">    
+                <ul class="ul-error">
+                  <li v-for="error in errorsCVV" >{{ error }}</li>
+                </ul></p>
                 </div>
               </div>
             </div>
@@ -255,17 +302,38 @@ export default {
       if (str === "email") {
         this.errorsEmail = [];
       }
-      if (str === "password") {
-        this.errorsPasswordSignUp = [];
+      if (str === "full_name") {
+        this.errorsFullName = [];
       }
-      if (str === "userName") {
-        this.errorsUserNameSignUp = [];
+      if (str === "address") {
+        this.errorsAdress = [];
       }
       if (str === "emailSignIn") {
         this.errorsEmailSignIn = [];
       }
-      if (str === "passwordSignIn") {
-        this.errorsPasswordSignIn = [];
+      if (str === "city") {
+        this.errorsCity = [];
+      }
+        if (str === "name_on_card") {
+        this.errorsNameOnCard = [];
+      }
+        if (str === "credit_card_number") {
+        this.errorsCreditCartNumber = [];
+      }
+        if (str === "exp_month") {
+        this.errorsExpMonth = [];
+      }
+       if (str === "exp_year") {
+        this.errorsExpYear = [];
+      }
+       if (str === "cvv") {
+        this.errorsCVV = [];
+      }
+      if (str === "state") {
+        this.errorsState = [];
+      }
+      if (str === "zip") {
+        this.errorsZip = [];
       }
     },
   },
@@ -294,6 +362,14 @@ export default {
   border-radius: 10px;
   -ms-flex: 50%; /* IE10 */
   flex: 50%;
+}
+.ul-error {
+  list-style: square;
+  color: red;
+  margin-top: -0.8em;
+  margin-bottom: 0.8em;
+  font-size: 0.7rem;
+  margin-left: 20px;
 }
 
 .col-75 {
