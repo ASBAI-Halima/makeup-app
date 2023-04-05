@@ -121,15 +121,160 @@
       "imageUrl": "https://theclevermeal.com/wp-content/uploads/2021/10/veggie-pizza-recipes_002.jpg",
       "category": "body",
       "rating": 1
+    }
+  ],
+  "users": [
+    {
+      "email": "abboutouria20010203@gmail.com",
+      "username": "touria",
+      "password": "12345678p",
+      "id": 1
     },
     {
-      "id": 4,
-      "name": "Meat Lover's",
-      "price": 14.99,
-      "quantity": 1,
-      "description": "Tomato sauce, mozzarella, pepperoni, sausage, bacon.",
-      "imageUrl": "https://www.vincenzosplate.com/wp-content/uploads/2021/08/610x350-Photo-5_863-How-to-Make-MEATLOVERS-PIZZA-Like-an-Italian-V1.jpg",
-      "category": "brushes"
+      "email": "abboutouria20010203@gmail.com",
+      "username": "touria",
+      "password": "12345678gf",
+      "id": 2
+    },
+    {
+      "email": "abboutouria20010203@gmail.com",
+      "username": "touria",
+      "password": "123456789m",
+      "id": 3
+    },
+    {
+      "email": "abboutouria20010203@gmail.com",
+      "username": "touria",
+      "password": "87646463132fdsf",
+      "id": 4
+    },
+    {
+      "email": "abboutouria20010203@gmail.com",
+      "username": "touria",
+      "password": "87646463132fdsf",
+      "id": 5
+    },
+    {
+      "email": "abboutouria20010203@gmail.com",
+      "username": "ouira",
+      "password": "84654dsfdfd",
+      "id": 6
+    },
+    {
+      "email": "abboutouria20010203@gmail.com",
+      "username": "touria",
+      "password": "fsdfdfdgdfgfdg544",
+      "id": 7
+    },
+    {
+      "email": "abboutouria20010203@gmail.com",
+      "username": "touria",
+      "password": "dfdgdfgdfg56453",
+      "id": 8
+    },
+    {
+      "email": "abboutouria20010203@gmail.com",
+      "username": "touria",
+      "password": "7646646fdfdfdf",
+      "id": 9
+    },
+    {
+      "email": "abboutouria20010203@gmail.com",
+      "username": "touia",
+      "password": "gfdgfdgfd454fg",
+      "id": 10
+    },
+    {
+      "email": "abboutouria20010203@gmail.com",
+      "username": "tfgfg",
+      "password": "hjhgjgh465454",
+      "id": 11
+    },
+    {
+      "email": "abboutouria20010203@gmail.com",
+      "username": "tfgfg",
+      "password": "hjhgjgh465454",
+      "id": 12
+    },
+    {
+      "email": "abboutouria20010203@gmail.com",
+      "username": "tfgfg",
+      "password": "hjhgjgh465454",
+      "id": 13
+    },
+    {
+      "email": "abboutouria20010203@gmail.com",
+      "username": "tfgfg",
+      "password": "hjhgjgh465454",
+      "id": 14
+    },
+    {
+      "email": "abboutouria20010203@gmail.com",
+      "username": "tfgfg",
+      "password": "hjhgjgh465454",
+      "id": 15
+    },
+    {
+      "email": "abboutouria20010203@gmail.com",
+      "username": "tfgfg",
+      "password": "hjhgjgh465454",
+      "id": 16
+    },
+    {
+      "email": "abboutouria20010203@gmail.com",
+      "username": "tfgfg",
+      "password": "hjhgjgh465454",
+      "id": 17
+    },
+    {
+      "email": "abboutouria20010203@gmail.com",
+      "username": "tfgfg",
+      "password": "hjhgjgh465454",
+      "id": 18
+    },
+    {
+      "email": "abboutouria20010203@gmail.com",
+      "username": "tfgfg",
+      "password": "hjhgjgh465454",
+      "id": 19
+    },
+    {
+      "id": 20,
+      "username": "tfgfg",
+      "password": "12345678t",
+      "email": "abboutouria20010203@gmail.com",
+      "cart": [
+        {
+          "id": 3,
+          "title": "Sony WH-CH510",
+          "image": "https://www.zinabel.ma/3315-large_default/fond-de-teint-liquid-coverage-hd-catrice.jpg",
+          "price": 265,
+          "quantity": 1,
+          "category": "Special Products",
+          "description": "Get your two favorite mascaras in one click to save while reducing packaging and minimizing the effects of multiple shipments on the environment! Lash Princess False Lash Mascara defines and separates lashes while achieving a bold look."
+        },
+        {
+          "id": 8,
+          "title": "Apple iPhone 11",
+          "image": "https://facesbeauty.ma/media/catalog/product/cache/de34c06b37f1ee016aa34cb208ea9fce/l/_/l_essentiel_fond_de_teint_clat_naturel_tenue_16h_ip_20_01n_trs_clair_seps9pu6um8b7uos.jpg",
+          "price": 290,
+          "quantity": 1,
+          "category": "Featured Products",
+          "description": "Get your two favorite mascaras in one click to save while reducing packaging and minimizing the effects of multiple shipments on the environment! Lash Princess False Lash Mascara defines and separates lashes while achieving a bold look."
+        }
+      ]
+    },
+    {
+      "email": "hhfhfgfj@fh.hhj",
+      "username": "fgfgfghhgh",
+      "password": "fgfhgfhgfhgfhf56353",
+      "id": 21
+    },
+    {
+      "email": "hhfhfgdfgdfgfj@fh.hhj",
+      "username": "fgfgfghhgh",
+      "password": "fgfhgfhgfhgfhf56353",
+      "id": 22
     }
   ]
 }

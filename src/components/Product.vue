@@ -12,11 +12,17 @@
             <p>
                 {{product.price}}$
             </p>
+            <router-link :to="{ name: 'details', params:{ id:product.id} }"  class="card-content-details" >
+                      
+                details <span class="material-symbols-outlined"> </span>
+              
+            </router-link> 
             
              <a class="button"  @click="addItemToCart(product)" >          
-                Add to cart
-                <span class="material-symbols-outlined"> arrow_right_alt </span>
+                Add to cart{{product.id }}
+                <span class="material-symbols-outlined"> add </span>
             </a>
+             
             </div>
         </div>
         </main>
@@ -31,6 +37,7 @@ export default {
             required: true
         }
     },
+    
     methods :{
     addItemToCart(product){
       let p=product;
@@ -77,7 +84,25 @@ main {
   position: relative;
   color: #ffffff;
   box-shadow: 0 10px 30px 5px rgba(0, 0, 0, 0.2);
+
 }
+.card-content-details{
+  margin: 200px;
+  margin-bottom: 370px;
+  color:#fff;
+  font-size: 15px;
+  border: 0.5px solid #000;
+  border-radius: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top:10px;
+  background-color: #000 ;
+  font-family: "Roboto Condensed", sans-serif;
+}
+.card-content-details:hover{
+  background-color: gray ;
+}
+
 .card img {
   position: absolute;
   object-fit: cover;

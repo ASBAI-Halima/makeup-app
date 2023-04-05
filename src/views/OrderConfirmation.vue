@@ -264,40 +264,40 @@ export default {
   methods: {
     checkout(event) {
       event.preventDefault();
-      this.errorsEmail = Validate.emailIsNotValid(
-        this.email,
-        this.users
-      );
-       this.errorsFullName = Validate.userNameIsNotValid(
-        this.full_name
-      );
-      this.errorsAdress = Validate.validateAddress(
-        this.address
-      );
-      this.errorsCity = Validate.validateCity(
-        this.city
-      );
-      this.errorsNameOnCard = Validate.nameOnCardIsNotValid(
-        this.name_on_card
-      );
-      this.errorsCreditCartNumber = Validate.isMoroccanCreditCardNumberValid(
-        this.credit_card_number
-      );
-      this.errorsExpMonth = Validate.validateExpMonth(
-        this.exp_month
-      );
-      this.errorsExpYear = Validate. validateExpYear(
-        this.exp_year
-      );
-      this.errorsState = Validate.validateState(
-        this.state
-      );
-      this.errorsZip = Validate. validateZipCode(
-        this.zip
-      );
-      this.errorsCVV = Validate.validateCVV(
-        this.cvv
-      );
+      // this.errorsEmail = Validate.emailIsNotValid(
+      //   this.email,
+      //   this.users
+      // );
+      //  this.errorsFullName = Validate.userNameIsNotValid(
+      //   this.full_name
+      // );
+      // this.errorsAdress = Validate.validateAddress(
+      //   this.address
+      // );
+      // this.errorsCity = Validate.validateCity(
+      //   this.city
+      // );
+      // this.errorsNameOnCard = Validate.nameOnCardIsNotValid(
+      //   this.name_on_card
+      // );
+      // this.errorsCreditCartNumber = Validate.isMoroccanCreditCardNumberValid(
+      //   this.credit_card_number
+      // );
+      // this.errorsExpMonth = Validate.validateExpMonth(
+      //   this.exp_month
+      // );
+      // this.errorsExpYear = Validate. validateExpYear(
+      //   this.exp_year
+      // );
+      // this.errorsState = Validate.validateState(
+      //   this.state
+      // );
+      // this.errorsZip = Validate. validateZipCode(
+      //   this.zip
+      // );
+      // this.errorsCVV = Validate.validateCVV(
+      //   this.cvv
+      // );
 
       if (
         this.errorsFullName.length == 0 &&
@@ -315,44 +315,7 @@ export default {
         VueRouter.push({ name: "order" });
       }
     },
-    deleteErrors(str) {
-      if (str === "email") {
-        this.errorsEmail = [];
-      }
-      if (str === "full_name") {
-        this.errorsFullName = [];
-      }
-      if (str === "address") {
-        this.errorsAdress = [];
-      }
-      if (str === "emailSignIn") {
-        this.errorsEmailSignIn = [];
-      }
-      if (str === "city") {
-        this.errorsCity = [];
-      }
-      if (str === "name_on_card") {
-        this.errorsNameOnCard = [];
-      }
-      if (str === "credit_card_number") {
-        this.errorsCreditCartNumber = [];
-      }
-      if (str === "exp_month") {
-        this.errorsExpMonth = [];
-      }
-      if (str === "exp_year") {
-        this.errorsExpYear = [];
-      }
-      if (str === "cvv") {
-        this.errorsCVV = [];
-      }
-      if (str === "state") {
-        this.errorsState = [];
-      }
-      if (str === "zip") {
-        this.errorsZip = [];
-      }
-    },
+ 
   },
 };
 </script>

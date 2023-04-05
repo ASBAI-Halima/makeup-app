@@ -7,6 +7,8 @@ import Contact from '../views/Contact.vue';
 import Cart from '../views/Cart.vue';
 import Checkout from '../views/Checkout.vue';
 import Category from '../views/Category.vue';
+import OrderConfirmation from '../views/OrderConfirmation.vue';
+import SignInView from '../views/SignInView.vue';
 
 
 Vue.use(VueRouter)
@@ -24,12 +26,19 @@ const routes = [
     props: true,
   },
   {
-    path: '/cart',
-    name: 'cart',
-    component: Cart
+    path: '/signin',
+    name: 'signin',
+    component: SignInView
+   
   },
   {
-    path: '/details',
+    path: '/cart',
+    name: 'cart',
+    component: Cart,
+    props: true,
+  },
+  {
+    path: '/details/:id',
     name: 'details',
     component: ProductDetails
   },
@@ -42,6 +51,11 @@ const routes = [
     path: '/checkout',
     name: 'checkout',
     component: Checkout
+  },
+  {
+    path: '/order',
+    name: 'order',
+    component: OrderConfirmation
   },
   {
     path: '/products',

@@ -22,10 +22,10 @@
           >
             <div class="row main align-items-center">
               <div class="col-2">
-                <img class="img-fluid" :src="item.imageUrl" alt="" />
+                <img class="img-fluid" :src="item.image" alt="" />
               </div>
               <div class="col">
-                <div class="row text-muted">{{ item.name }}</div>
+                <div class="row text-muted">{{ item.title }}</div>
                 <div class="row">{{ item.category }}</div>
               </div>
               <div class="col">
@@ -112,7 +112,7 @@
 import { mapState } from "vuex";
 export default {
   created() {
-    this.$store.dispatch("fetchFromCart");
+    this.$store.dispatch("fetchCart", sessionStorage.getItem("user"));
   },
   methods: {
     update(item, newQ, updated) {
@@ -120,14 +120,20 @@ export default {
         return;
       }
       item.quantity = newQ;
-      this.$store.dispatch("setQuantity", item);
+      this.$store.dispatch("setQuantity", {
+        product: item,
+
+        id: sessionStorage.getItem("user"),
+      });
     },
     removeItem(item) {
       console.log("id from cart " + item);
-      
-      this.$store.dispatch("deleteProduct",  item);
+
+      this.$store.dispatch("deleteProduct", {
+        product: item,
+        id: sessionStorage.getItem("user"),
+      });
     },
-    
   },
 
   computed: mapState(["cart"]),

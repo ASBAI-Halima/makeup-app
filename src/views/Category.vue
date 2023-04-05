@@ -8,8 +8,7 @@
       </button>
       <input type="text" class="input-search" placeholder="Type to Search..." />
     </div>
-    <!-- <router-link :to="{ name: 'details' }"></router-link> -->
-    <!-- ---products ---- -->
+    
    
     <div class="containers-products">
       <link rel="preconnect" href="https://fonts.googleapis.com" />

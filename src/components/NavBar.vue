@@ -32,6 +32,9 @@
                <router-link :to="{ name: 'cart' }" class="nav__link active-link">
                  <stron><i class='bx bx-cart cart-icon change-theme' id='theme-button'></i></stron>
                </router-link>
+               <router-link :to="{ name: 'signin' }" class="nav__link active-link">
+                 <stron><i class='bx bx-user cart-icon change-theme' id='theme-button'></i></stron>
+               </router-link>
             </div>
         </div>
     </header>
@@ -85,8 +88,10 @@ export default {
         margin-left: 1rem;
     }
     .nav__cart{
-        width: 200px;
+        width: 100px;
         font-size: 28px;
+        display: flex;
+        justify-content: space-around;
     }
    
 </style>
