@@ -13,8 +13,9 @@ export default new Vuex.Store({
     category: [],
     cart: [],
     users: [],
-    user:null,
-    product:null
+    reviews: [],
+    user: null,
+    product: null
   },
   getters: {
     catLength: (state) => state.products.length,
@@ -29,6 +30,12 @@ export default new Vuex.Store({
     },
     SET_PRODUCT(state, product) {
       state.product = product
+    },
+    ADD_TO_REVIEWS(state, review) {
+      state.reviews.push(review)
+    },
+    SET_REVIEWS(state, reviews) {
+      state.reviews = reviews
     },
     // ---Cart---
     SET_CART(state, cart) {
@@ -83,7 +90,7 @@ export default new Vuex.Store({
         .catch((error) => {
           console.error(error.message)
         })
-      
+
     },
     fetchCategory({ commit }, category) {
       ProductService.getProductByCategory(category)
@@ -110,7 +117,7 @@ export default new Vuex.Store({
       } else {
         console.log('from store' + product.id);
         CartService.addToCart(product)
-          .then((response) => {
+          .then(() => {
             commit('ADD_TO_CART', product);
             console.log('add to cart---' + this.state.cart.length)
           })
@@ -122,17 +129,13 @@ export default new Vuex.Store({
 
 
     },
+
     setQuantity({ commit }, { product, id }) {
       let cart = [...this.state.cart.map((e) => {
-
         if (e.id === product.id) {
-
           return { ...e, quantity: product.quantity };
-
         }
-
         return e;
-
       })]
       UserService.putCartOfUser(id, cart).then((response) => {
 
@@ -144,6 +147,44 @@ export default new Vuex.Store({
 
       })
     },
+
+
+    addReview({ commit }, { id, review }) {
+
+      ProductService.getProduct(id)
+        .then((response) => {
+
+          if (response.data.reviews != null) {
+            console.log(response.data)
+            this.state.reviews = [...response.data.reviews, review];
+
+          }
+          else {
+            this.state.reviews.push(review);
+          }
+          try {
+            ProductService.addReviewAboutProduct(id, this.state.reviews)
+              .then(() => {
+                commit('ADD_TO_REVIEWS', review);
+                ProductService.getProduct(id)
+                  .then((response) => {
+                    commit('SET_PRODUCT', response.data);
+                  })
+                  .catch((error) => {
+                    console.error('--erreur---2' + error.message)
+                  });
+                alert('Your review has been added!');
+              })
+          } catch (error) {
+            console.log('--erreur---' + error);
+          }
+        })
+        .catch((error) => {
+          console.error('--erreur---2' + error.message)
+        });
+
+    },
+
     deleteProduct({ commit }, { product, id }) {
       let cart = this.state.cart.filter(p => p.id !== product.id);
       try {
@@ -157,14 +198,16 @@ export default new Vuex.Store({
     },
     signUp({ commit }, user) {
       let successSignUp = true;
-      UserService.postUser(user).then((response) => {
-        commit('SIGN_UP', user)
-      }).catch((error) => {
-        console.error(error.message)
-        successSignUp = false;
-      })
+      UserService.postUser(user)
+        .then((response) => {
+          commit('SIGN_UP', user)
+        }).catch((error) => {
+          console.error(error.message)
+          successSignUp = false;
+        })
       return successSignUp;
-    }, signIn({ commit }, id) {
+    },
+    signIn({ commit }, id) {
       UserService.getUserById(id).then((response) => {
         commit('SET_USERS', { id: response.data.id })
         if (response.data.cart != null && response.data.cart.length > 0) {

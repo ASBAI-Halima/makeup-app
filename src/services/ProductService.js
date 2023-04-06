@@ -19,5 +19,11 @@ export default {
   getProductByCategory(category) {
     return apiClient.get(`products?category=${category}`)
   },
+  addReviewAboutProduct(id, reviews) {
+    return apiClient.patch('/products/' + id, { reviews: reviews })
+  },
+  getReviews(id) {
+    return apiClient.get(`/products/${id}`);
+  }
   
 }

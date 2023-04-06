@@ -24,7 +24,8 @@ export default {
   getUserById(id) {
     console.log(id);
     return apiClient.get('/users/' + id);
-  }, putCartOfUser(id, cart) {
+  },
+  putCartOfUser(id, cart) {
     return apiClient.patch('/users/' + id, { cart: cart })
   },
 

@@ -65,7 +65,8 @@ export default {};
   border-radius: 10px;
 }
 
-.why-us h2 ,h3{
+.why-us h2,
+h3 {
   text-align: center;
   margin-bottom: 50px;
   font-family: "Playball", cursive;
@@ -88,16 +89,6 @@ export default {};
   margin-bottom: 30px;
 }
 
-@media screen and (max-width: 767px) {
-  .why-us .row {
-    flex-direction: column;
-  }
-
-  .why-us img {
-    margin-bottom: 20px;
-  }
-}
-
 .why-us-content {
   display: flex;
   flex-direction: row;
@@ -108,18 +99,16 @@ export default {};
 .why-us-item {
   width: 100%;
   margin-bottom: 30px;
- border: #fff 1px solid;
- border-radius: 10px;
- padding: 10px;
- margin: 4%;
+  border: #fff 1px solid;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 4%;
   transform: translateY(30px);
   transition: opacity 0.5s ease-out, transform 0.5s ease-out;
 }
 
-
-
-
-.why-us-item p,p {
+.why-us-item p,
+p {
   font-size: 18px;
   line-height: 1.5;
 }
@@ -136,6 +125,11 @@ export default {};
   height: auto;
 }
 
+.why-us-content .why-us-item.animated,
+.why-us-image.animated {
+  opacity: 1;
+  transform: translateX(0);
+}
 @media screen and (min-width: 768px) {
   .why-us-content {
     flex-wrap: nowrap;
@@ -160,10 +154,37 @@ export default {};
     transform: translateY(-50%);
   }
 }
+@media screen and (max-width: 767px) {
+  .why-us .row {
+    flex-direction: column;
+  }
 
-.why-us-content .why-us-item.animated,
-.why-us-image.animated {
-  opacity: 1;
-  transform: translateX(0);
-} 
+  .why-us img {
+    margin-bottom: 20px;
+  }
+}
+@media screen and (max-width: 1100px) {
+  .row-why {
+    display: flex;
+    flex-direction: column;
+  }
+  .col-md-6-left {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 20px;
+  }
+  .col-md-6{
+    display: none;
+  }
+}
+@media screen and (max-width: 650px){
+    .why-us-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  }
+}
 </style>
