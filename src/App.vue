@@ -197,6 +197,8 @@ a{
   font-family: 'Playball', cursive;
     justify-content: space-between;
     padding: 20px;
+    background-color: rgba(255, 255, 255, 0.4)
+   
 }
 .nav__toggle{
     font-size: var(--h1-font-size);
@@ -204,13 +206,14 @@ a{
     border: 2px solid transparent;
     cursor: pointer;
     z-index: var(--Z-fixed);
+    
 }
 .nav__toggle:hover{
     color: var(--first-color);
     border: 2px solid var(--first-color);
 }
 /* MEDIA QUERY NAVBAR */
-@media (max-width: 960px){
+/* @media (max-width: 960px){
     .nav{
         position: absolute;
         top: 0;
@@ -257,7 +260,7 @@ a{
 }
 .scroll-header{
     background-color: var(--white-color);
-}
+} */
 /* HERO */
 .hero{
     width: 100%;
@@ -632,11 +635,12 @@ a{
         transform: translateX(300px) rotate(360deg);
     }
 }
-@media (min-width: 960px){
+@media (min-width: 1200px){
     .nav__menu{
         display: flex;
         align-items: center;
         padding: 0;
+         
     }
     .nav__item:not(:last-child){
         margin-right: var(--mb-2-5);

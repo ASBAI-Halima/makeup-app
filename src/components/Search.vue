@@ -1,75 +1,87 @@
 <template>
-
-   <div>
-    <select  id="fruit" v-model="selected" @change="emitSearch">
-        <option value="1" >Felttered by </option>
-        <option v-for="item in items" :value="item">{{ item}}</option>
+<div>
+  <div class="box" v-if="categories != null">
+    <select class="mydropdown" v-model="categoryValue" @change="emitCategory()">
+      <option v-for="option in categories" :value="option">
+        {{ option }}
+      </option>
     </select>
-    <p>{{selected}}</p>
+  </div>
+  <div class="box" v-else-if="prices != null">
+    <select class="mydropdown" v-model="priceValue" @change="emitPrice()">
+      <option v-for="option in prices" :value="option.value">
+        {{ option.text }}
+      </option>
+    </select>
+  </div>
+  <div class="box" v-else-if="rating != null">
+    <select class="mydropdown" v-model="ratingValue" @change="emitRating()">
+      <option v-for="option in rating" :value="option">
+        {{ option }}
+      </option>
+    </select>
+  </div>
   </div>
 </template>
 
 <script>
-
 export default {
-
-    props: {
-    name: String,
-    options: Array,
-    items: {
-            type: Array,
-            required: true
-        },
-       
+  props: {
+    categories: {
+      type: [],
+    },
+    prices: {
+      type: [],
+    },
+    rating: {
+      type: [],
+    }
   },
-  data(){
+  data() {
     return {
-        selected: ''
-    }
+      categoryValue:  null,
+      priceValue: null,
+      ratingValue: null,
+    };
   },
-  computed:{
-
+  methods: {
+    emitCategory() {
+      this.$emit("category", this.categoryValue);
+    },
+    emitPrice() {
+      this.$emit("price", this.priceValue);
+    },
+    emitRating() {
+      this.$emit("rating", this.ratingValue);
+    },
   },
-   methods: {
-    emitSearch() {
-        console.log('from search co ---'+this.selected)
-      this.$emit('search', this.selected)
-    }
-  }
-}
+};
 </script>
 
-<style scoped>
-    .container-products {
-  height: 100%;
-  margin-top: 100px;  
-  align-self: center;}
-
-label {
-  display: block;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-}
-
-select {
-  display: block;
-  font-size: 1rem;
-  padding: 0.5rem;
-  border-radius: 0.25rem;
-  border: 1px solid #ccc;
-  background-color: #fff;
-  width: 200%;
-  margin-bottom: 1rem;
-}
-
-select:focus {
+<style>
+.box select {
+  padding: 12px;
+  width: 250px;
+  border: none;
+  font-size: 20px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+  -webkit-appearance: button;
+  appearance: button;
   outline: none;
-  border-color: #8ac6d1;
-  box-shadow: 0 0 0 2px rgba(138, 198, 209, 0.2);
 }
-div{
-    margin-left: 0%;
-    padding-left: 20px;
-    padding-right: 20px;
+.mydropdown {
+  border: none;
+  border-bottom: 2px dotted black;
+  display: inline;
+  font-weight: 600;
+  cursor: pointer;
+}
+.mydropdown:hover,
+.myoption:active,
+.myoption:checked {
+  border: 2px dotted #da2535;
+}
+.box select option {
+  padding: 30px;
 }
 </style>

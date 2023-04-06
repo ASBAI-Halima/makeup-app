@@ -3,7 +3,9 @@
     <!-- ---search ---- -->
 
     <div class="container-search">
-     <Search :items="catego" @search="handleSearch"/>
+      <Search :categories="categories" @category="setCategory"  />
+      <Search :prices="prices" @price="setPrice" />
+      <Search :rating="ratingSelect" @rating="setRating" />
       <!-- <Search :items="prices" @search="handleSearch"/>
        <Search :items="rating" @search="handleSearch"/> -->
     </div>
@@ -21,13 +23,13 @@
         rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
       />
-       
-          <Product
+
+      <Product
         v-for="product in products"
         :key="product.id"
         :product="product"
       />
-       
+
       <!-- <div v-else>
       <Product
         v-for="product in searchResults"
@@ -35,8 +37,6 @@
         :product="product"
       /></div> -->
     </div>
-
-
   </div>
 </template>
 
@@ -49,51 +49,86 @@ export default {
   components: {
     Icon,
     Product,
-    Search
+    Search,
   },
-  data(){
+  data() {
     return {
-      categories:[],
-      rating :[1,2,3,4,5],
-      prices:[1, 2, 3, 4, 5, 5, 5, 5],
-      searchResults:null
-    }
+       category: null,
+      price: null,
+      rating: null,
+      prices: [
+        { value: 100, text: "< 100$" },
+        { value: 300, text: "< 300$" },
+        { value: 500, text: "< 500$" },
+        { value: 1000, text: "< 1000$" },
+      ],
+      ratingSelect: [1, 2, 3, 4, 5],
+    };
   },
 
   created() {
     this.$store.dispatch("fetchProducts");
-    this.categories=[...this.products.map((e)=>e.category)];
-      this.searchResults = [...this.products];
-    console.log('----'+this.categories);
+     this.$store.dispatch("fetchCategories");
   },
-  computed: {...mapState(["products"]),
-  catego() {
-     return [...this.products.map((e)=>e.category)];
-  } }
-
-    ,
-  methods :{
-    addItemToCart(product){
-       this.$store.dispatch("addToCart", product);
+  computed: {
+    products() {
+      return this.$store.state.products
+        .filter(
+          (product) =>
+            (this.category != null && this.category == product.category) ||
+            this.category == null
+        )
+        .filter(
+          (product) =>
+            (this.price != null && product.price <= this.price) ||
+            this.price == null
+        )
+        .filter(
+          (product) =>
+            (this.rating != null &&
+              product.rating != null &&
+              this.rating == product.rating) ||
+            this.rating == null
+        );
     },
-      handleSearch(searchTerm) {
-      this.searchResults = [...this.products.filter(item => {
-        console.log("from parent de search " + searchTerm);
-        return item.category.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1;
-      })]
+     categories() {
+      return this.$store.state.categories;
     }
+  },
+
+  methods: {
+    
+    handleSearch(searchTerm) {
+      this.searchResults = [
+        ...this.products.filter((item) => {
+          console.log("from parent de search " + searchTerm);
+          return (
+            item.category.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1
+          );
+        }),
+      ];
+    },
+    setCategory(value) {
+      this.category = value;
+    },
+    setPrice(value) {
+      this.price = value;
+    },
+    setRating(value) {
+      this.rating = value;
+    },
   },
 };
 </script>
 
 <style scoped>
-.container-search{
+.container-search {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 50%;
   margin: auto;
-  
+
   margin-top: 100px;
 }
 .container-products {
@@ -175,11 +210,9 @@ body {
 }
 /* -----------products ------------- */
 .containers-products {
- 
   display: grid;
   gap: 1rem;
- grid-template-columns: repeat(auto-fit, minmax(320px,1fr));
-  
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
 }
 
 main {

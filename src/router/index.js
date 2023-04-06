@@ -3,7 +3,6 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue';
 import Products from '../views/Products.vue';
 import ProductDetails from '../views/ProductDetails.vue';
-import Contact from '../views/Contact.vue';
 import Cart from '../views/Cart.vue';
 import Checkout from '../views/Checkout.vue';
 import Category from '../views/Category.vue';
@@ -41,11 +40,6 @@ const routes = [
     path: '/details/:id',
     name: 'details',
     component: ProductDetails
-  },
-  {
-    path: '/contact',
-    name: 'contact',
-    component: Contact
   },
   {
     path: '/checkout',

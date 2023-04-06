@@ -18,8 +18,8 @@
         <div class="price">
           $ <span>{{ product.price }}</span>
         </div>
-        <div v-if="product.reviews" class="variant">
-          <h3>rating : {{Math.round(product.reviews.reduce((acc, review) => acc + review.rating, 0)/product.reviews.length)}}/5</h3>
+        <div v-if="product.reviews!== null" class="variant">
+          <h3 >rating : {{Math.round(product.reviews.reduce((acc, review) =>{if(review.rating != null)  acc += review.rating; return acc;}  , 0)/product.reviews.length)}}/5</h3>
         </div>
         <div class="description">
           <h3>Descreption</h3>
@@ -27,7 +27,7 @@
             <p>{{ product.description }}</p>
           </ul>
         </div>
-        <button class="buy--btn">ADD TO CART</button>
+        <button @click="addItemToCart(product)" class="buy--btn">ADD TO CART</button>
       </div>
     </section>
     <!-- --------- donner un avis ---- -->
@@ -47,6 +47,7 @@
 
 <script>
 import { mapState } from "vuex";
+import VueRouter from "@/router/index";
 import Review from "@/components/Review.vue";
 import AddReview from "@/components/AddReview.vue";
 export default {
@@ -64,7 +65,22 @@ export default {
     this.$store.dispatch("fetchProduct", this.productId);
   },
   computed: 
-   mapState(["product"])
+   mapState(["product"]),
+    
+    methods :{
+   addItemToCart(product) {
+      
+      if (sessionStorage.getItem("user") != null) {
+        this.$store.dispatch("setProductInCart", {
+          product: product,
+          id: sessionStorage.getItem("user")
+        });
+        VueRouter.push({ name: "cart" });
+      } else {
+        VueRouter.push({ name: "signin" });
+      }
+    },
+  },
 };
 </script>
 

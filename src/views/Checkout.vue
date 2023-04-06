@@ -14,6 +14,7 @@
               <input
                 v-model="full_name"
                 @focus="deleteErrors('fullName')"
+                 :disabled='confirm'
                 type="text"
                 id="fname"
                 name="firstname"
@@ -32,6 +33,7 @@
                 name="email"
                 v-model="email"
                 @focus="deleteErrors('email')"
+                :disabled='confirm'
                 placeholder="john@example.com"
               />
 
@@ -46,6 +48,7 @@
               <input
                 v-model="address"
                 @focus="deleteErrors('address')"
+                :disabled='confirm'
                 type="text"
                 id="adr"
                 name="address"
@@ -59,6 +62,7 @@
               <input
                 v-model="city"
                 @focus="deleteErrors('city')"
+                :disabled='confirm'
                 type="text"
                 id="city"
                 name="city"
@@ -78,6 +82,7 @@
                     name="state"
                     v-model="state"
                     @focus="deleteErrors('state')"
+                    :disabled='confirm'
                     placeholder="NY"
                   />
                    <p v-if="errorsState.length">    
@@ -90,6 +95,7 @@
                   <input
                     v-model="zip"
                     @focus="deleteErrors('zip')"
+                    :disabled='confirm'
                     type="text"
                     id="zip"
                     name="zip"
@@ -119,6 +125,7 @@
                 name="cardname"
                 v-model="name_on_card"
                 @focus="deleteErrors('nameOnCard')"
+                :disabled='confirm'
                 placeholder="John More Doe"
               />
                <p v-if="errorsNameOnCard.length">    
@@ -132,6 +139,7 @@
                 name="cardnumber"
                 v-model="credit_card_number"
                 @focus="deleteErrors('credit_card_number')"
+                :disabled='confirm'
                 placeholder="1111-2222-3333-4444"
               />
               <p v-if="errorsCreditCartNumber.length">    
@@ -145,6 +153,7 @@
                 name="expmonth"
                 v-model="exp_month"
                 @focus="deleteErrors('expMonth')"
+                :disabled='confirm'
                 placeholder="September"
               />
                <p v-if="errorsExpMonth.length">    
@@ -160,6 +169,7 @@
                     name="expyear"
                     v-model="exp_year"
                     @focus="deleteErrors('expYear')"
+                    :disabled='confirm'
                     placeholder="2018"
                   />
                    <p v-if="errorsExpYear.length">    
@@ -172,6 +182,7 @@
                   <input
                     v-model="cvv"
                     @focus="deleteErrors(errorsCVV)"
+                    :disabled='confirm'
                     type="text"
                     id="cvv"
                     name="cvv"
@@ -185,11 +196,10 @@
               </div>
             </div>
           </div>
-          <!-- <label>
-            <input type="checkbox" checked="checked" name="sameadr" /> Shipping
-            address same as billing
-          </label> -->
-          <input type="submit" value="Continue to checkout" class="btn" />
+         
+          <input type="submit" value="Continue to checkout" class="btn"  v-if="confirm == false"/>
+           <input type="submit" value="Confirm order" class="btn" @click="confirmOrder()"  v-else/>
+           <button type="submit"  @click="cancel()" class="btn" v-if="confirm" >cancel</button>
         </form>
       </div>
     </div>
@@ -202,9 +212,7 @@
           >
         </h4>
         <p v-for="item in cart">
-          <a href="#">{{ item.name }}</a
-          ><span>{{ item.quantity }}</span>
-          <span class="price">${{ item.price }}</span>
+          <a >{{ item.name }}</a><a>{{ item.quantity }}</a><a class="price">${{ item.price * item.quantity}}</a>
         </p>
         <hr />
         <p>
@@ -255,10 +263,21 @@ export default {
       errorsState: [],
       errorsZip: [],
       errorsCVV: [],
+       confirm: false
     };
   },
   created() {
-    this.$store.dispatch("fetchFromCart");
+      if (sessionStorage.getItem("user") != null) {
+      this.$store.dispatch("fetchCart", sessionStorage.getItem("user"));
+      this.$store.dispatch("setUser", sessionStorage.getItem("user"));
+    } else {
+      VueRouter.push({ name: "home" });
+    }
+  },
+  updated() {
+    if (this.cart == null) {
+      VueRouter.push({ name: "home" });
+    }
   },
   computed: mapState(["cart"]),
   methods: {
@@ -312,7 +331,8 @@ export default {
         this.errorsZip.length == 0 &&
         this.errorsCVV.length == 0
       ) {
-        VueRouter.push({ name: "order" });
+        
+        this.confirm = true;
       }
     },
     deleteErrors(str) {
@@ -353,6 +373,13 @@ export default {
         this.errorsZip = [];
       }
     },
+       confirmOrder() {
+       this.$store.dispatch("cleanCartAfterConfirm", sessionStorage.getItem("user"));
+       VueRouter.push({name:'order'});     
+    },
+    cancel(){
+      return this.confirm = false;
+    }
   },
 };
 </script>

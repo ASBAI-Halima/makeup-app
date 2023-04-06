@@ -30,9 +30,15 @@
             class="star"
             >&#9733;</label
           >
+         
         </div>
         </div>
       </div>
+       <p v-if="pickedErrors.length">    
+                <ul class="ul-error">
+                  <li v-for="error in pickedErrors" >{{ error }}</li>
+                </ul>
+              </p>
       <div class="form-group">
         <label for="commentaire">Review:</label>
         <textarea
@@ -70,6 +76,7 @@ export default {
       errorsEmail: [],
       errorsName: [],
       errorsReview: [],
+      pickedErrors: [],
       ratingArr: [1, 2, 3, 4, 5],
     };
   },
@@ -80,12 +87,16 @@ export default {
       this.errorsEmail = Validate.fieldIsEmpty(this.email, "Email field");
       this.errorsName = Validate.fieldIsEmpty(this.name, "Name field");
       this.errorsReview = Validate.fieldIsEmpty(this.review, "Review field");
+      this.pickedErrors = Validate.fieldIsEmpty(
+        this.picked,
+        "picking statr to rating the product"
+      );
       console.log(this.picked);
       if (
         this.errorsEmail.length === 0 &&
         this.errorsName.length === 0 &&
-        this.errorsReview.length === 0
-         && this.picked !== null
+        this.errorsReview.length === 0 &&
+        this.picked !== null
       ) {
         const newReview = {
           name: this.name,
@@ -94,16 +105,13 @@ export default {
           review: this.review,
         };
         this.$store.dispatch("addReview", { id: this.id, review: newReview });
-        this.$data.email='';
-        this.$data.name='';
-        this.$data.review='';
-        this.$data.picked='';
+        this.$data.email = "";
+        this.$data.name = "";
+        this.$data.review = "";
+        this.$data.picked = "";
       }
-      
     },
-    // resetForm(){
-      
-    // },
+
     deleteErrors(str) {
       if (str === "email") {
         this.errorsEmail = [];

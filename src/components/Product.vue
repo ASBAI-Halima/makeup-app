@@ -12,24 +12,23 @@
             <p>
                 {{product.price}}$
             </p>
-            <router-link :to="{ name: 'details', params:{ id:product.id} }"  class="card-content-details" >
+            <router-link :to="{ name: 'details', params:{ id:product.id} }"  class="button"  >
                       
-                details <span class="material-symbols-outlined"> </span>
+                details 
               
             </router-link> 
             
-             <a class="button"  @click="addItemToCart(product)" >          
-                Add to cart{{product.id }}
+             <a  @click="addItemToCart(product)" class="card-content-details">          
+                <stron><i class='bx bx-cart cart-icon change-theme' id='theme-button'></i></stron>
                 <span class="material-symbols-outlined"> add </span>
-            </a>
-             
+            </a>             
             </div>
         </div>
-        </main>
-  
+        </main>  
 </template>
 
 <script>
+import VueRouter from "@/router/index";
 export default {
     props: {
         product: {
@@ -39,11 +38,18 @@ export default {
     },
     
     methods :{
-    addItemToCart(product){
-      let p=product;
-      
-       this.$store.dispatch("addToCart", p);
-    }
+   addItemToCart(product) {
+    
+      if (sessionStorage.getItem("user") != null) {
+        this.$store.dispatch("setProductInCart", {
+          product: product,
+          id: sessionStorage.getItem("user"),
+        });
+        VueRouter.push({ name: "cart" });
+      } else {
+        VueRouter.push({ name: "signin" });
+      }
+    },
   },
 };
 </script>

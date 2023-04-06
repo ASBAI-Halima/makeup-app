@@ -22,10 +22,10 @@
           >
             <div class="row main align-items-center">
               <div class="col-2">
-                <img class="img-fluid" :src="item.image" alt="" />
+                <img class="img-fluid" :src="item.imageUrl" alt="" />
               </div>
               <div class="col">
-                <div class="row text-muted">{{ item.title }}</div>
+                <div class="row text-muted">{{ item.name }}</div>
                 <div class="row">{{ item.category }}</div>
               </div>
               <div class="col">
@@ -99,9 +99,7 @@
               }}
             </div>
           </div>
-          <router-link :to="{ name: 'checkout' }" class="button"
-            ><button class="btn">CHECKOUT</button></router-link
-          >
+          <button class="btn" @click="goToCheckOut()">CHECKOUT</button>
         </div>
       </div>
     </div>
@@ -110,6 +108,7 @@
 
 <script>
 import { mapState } from "vuex";
+import VueRouter from "@/router/index";
 export default {
   created() {
     this.$store.dispatch("fetchCart", sessionStorage.getItem("user"));
@@ -133,6 +132,15 @@ export default {
         product: item,
         id: sessionStorage.getItem("user"),
       });
+    },
+    goToCheckOut() {
+      if (this.cart != null && this.cart.length != 0) {
+        VueRouter.push({ name: "checkout" });
+      }
+      else {
+        alert("your cart is empty!");
+         VueRouter.push({ name: "products" });
+      }
     },
   },
 
