@@ -26,7 +26,7 @@
         </div>
         <div class="copy">
             <span>&copy; All rights reserved</span>
-            <p>MADE WITH LOVE BY ZARA </p>
+            <p>MADE WITH LOVE BY Asbai Halima SQLI </p>
         </div>
     </footer>
 </template>
