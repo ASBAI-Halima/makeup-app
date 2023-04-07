@@ -1,24 +1,74 @@
 <template>
   <div id="content">
+       <div >
+         <AwesomeVueStarRating :star="this.review.rating" 
+              :disabled="this.disabled" 
+              :maxstars="this.maxstars" 
+              :starsize="this.starsize" 
+              :hasresults="this.hasresults" 
+              :hasdescription="this.hasdescription" 
+              :ratingdescription="this.ratingdescription" />
+
+      </div>
     <div class="testimonial">
+   
       <blockquote>
+        
+
         {{review.review}}
       </blockquote>
       <div></div>
       <p >{{review.name}}</p>
-       <p >{{review.email}}</p>
+       <!-- <p >{{review.email}}</p> -->
+       <p></p>
     </div>
   </div>
 </template>
 
 <script>
+import AwesomeVueStarRating from 'awesome-vue-star-rating'
 export default {
+   components: {
+    AwesomeVueStarRating
+  },
    props: {
     review: {
       type: Object,
       required: true,
     },
   },
+   data() {
+    return {
+      star: 5, // default star
+      ratingdescription: [
+        {
+          text: 'Poor',
+          class: 'star-poor'
+        },
+        {
+          text: 'Below Average',
+          class: 'star-belowAverage'
+        },
+        {
+          text: 'Average',
+          class: 'star-average'
+        },
+        {
+          text: 'Good',
+          class: 'star-good'
+        },
+        {
+          text: 'Excellent',
+          class: 'star-excellent'
+        }
+      ],
+      hasresults: false,
+      hasdescription: false,
+      starsize: 'xs', //[xs,lg,1x,2x,3x,4x,5x,6x,7x,8x,9x,10x],
+      maxstars: 5,
+      disabled: false
+    }
+}, 
 };
 </script>
 
@@ -85,6 +135,10 @@ body {
   text-align: left;
   color: #1a1a1a;
   font-size: 15px;
+}
+#content{
+  border: 1px #1a1a1a solid;
+  border-radius: 10px;
 }
 
 </style>

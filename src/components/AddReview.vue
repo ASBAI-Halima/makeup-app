@@ -22,7 +22,7 @@
                   <li v-for="error in errorsEmail" >{{ error }}</li>
                 </ul>
               </p>
-      <div class="form-group">
+      <!-- <div class="form-group">
         <label for="avis"  >Rating:</label>
         <div class="stars">
         <div class="rating" v-for="i in ratingArr" :key="i" >
@@ -33,7 +33,13 @@
          
         </div>
         </div>
-      </div>
+      </div> -->
+       <div class="stars">
+       
+         <div class="margin__rating" >
+            <AwesomeVueStarRating :star="this.star" :disabled="this.disabled" :maxstars="this.maxstars" :starsize="this.starsize" :hasresults="this.hasresults" :hasdescription="this.hasdescription" :ratingdescription="this.ratingdescription" />
+          </div>
+        </div>
        <p v-if="pickedErrors.length">    
                 <ul class="ul-error">
                   <li v-for="error in pickedErrors" >{{ error }}</li>
@@ -60,7 +66,11 @@
 
 <script>
 import Validate from "@/validation/Validate";
+import AwesomeVueStarRating from "awesome-vue-star-rating";
 export default {
+  components: {
+    AwesomeVueStarRating,
+  },
   props: {
     id: {
       type: Number,
@@ -78,7 +88,37 @@ export default {
       errorsReview: [],
       pickedErrors: [],
       ratingArr: [1, 2, 3, 4, 5],
+      
+      star: 5, // default star
+      ratingdescription: [
+        {
+          text: "Poor",
+          class: "star-poor",
+        },
+        {
+          text: "Below Average",
+          class: "star-belowAverage",
+        },
+        {
+          text: "Average",
+          class: "star-average",
+        },
+        {
+          text: "Good",
+          class: "star-good",
+        },
+        {
+          text: "Excellent",
+          class: "star-excellent",
+        },
+      ],
+      hasresults: true,
+      hasdescription: false,
+      starsize: "lg", //[xs,lg,1x,2x,3x,4x,5x,6x,7x,8x,9x,10x],
+      maxstars: 5,
+      disabled: false,
     };
+    
   },
   methods: {
     AddReview(e) {

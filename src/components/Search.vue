@@ -2,6 +2,7 @@
 <div>
   <div class="box" v-if="categories != null">
     <select class="mydropdown" v-model="categoryValue" @change="emitCategory()">
+       <option :value="null" >by categorie</option>
       <option v-for="option in categories" :value="option">
         {{ option }}
       </option>
@@ -9,6 +10,7 @@
   </div>
   <div class="box" v-else-if="prices != null">
     <select class="mydropdown" v-model="priceValue" @change="emitPrice()">
+      <option :value="null" >by price</option>
       <option v-for="option in prices" :value="option.value">
         {{ option.text }}
       </option>
@@ -16,6 +18,8 @@
   </div>
   <div class="box" v-else-if="rating != null">
     <select class="mydropdown" v-model="ratingValue" @change="emitRating()">
+       <option :value="null" >by rating</option>
+       <option value="0">without rating </option>
       <option v-for="option in rating" :value="option">
         {{ option }}
       </option>

@@ -13,7 +13,7 @@
         rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
       />
-      <div>{{cat}}</div>
+      
       <Product v-for="product in category" :key="product.id" :product="product" v-if="category.length" />
     </div>
   </div>
@@ -32,6 +32,11 @@ export default {
     components: {
     Product
   },
+  watch :{
+    cat(){
+      this.$store.dispatch('fetchCategory',this.cat);
+    }
+  },
   created() {
     console.log('-->'+ this.cat)
     this.$store.dispatch('fetchCategory',this.cat);
@@ -47,6 +52,8 @@ export default {
 .container-products {
   height: 100%;
   margin-top: 100px;
+  width: max-content;
+  margin: 100px auto;
 }
 * {
   box-sizing: border-box;
@@ -119,7 +126,7 @@ body {
 }
 /* -----------products ------------- */
 .containers-products {
-  max-width: 1200px;
+  max-width: max-content;
   display: grid;
   gap: 1rem;
 }

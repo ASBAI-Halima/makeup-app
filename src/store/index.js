@@ -226,17 +226,23 @@ export default new Vuex.Store({
         })
       return successSignUp;
     },
-    signIn({ commit }, id) {
-      UserService.getUserById(id).then((response) => {
-        commit('SET_USERS', { id: response.data.id })
-        if (response.data.cart != null && response.data.cart.length > 0) {
-          VueRouter.push({ name: 'cart' })
-        } else {
-          VueRouter.push({ name: 'home' })
-        }
-      }).catch((error) => {
-        console.error(error.message)
-      })
+    signIn({ commit }, {email, password}) {
+      UserService.getUsers().then((res) => {
+
+        res.data.forEach((user) => {
+          if(user.email === email && user.password === password){
+            sessionStorage.setItem("user", user.id);
+            commit('SET_USERS', { id: user.id })
+            if (user.cart != null && user.cart.length > 0) {
+              VueRouter.push({ name: 'cart' })
+            } else {
+              VueRouter.push({ name: 'home' })
+            }
+          }
+        })
+        
+      }).catch((error) => { console.error(error.message) })
+
     },
     getUsers({ commit }, email) {
       UserService.getUsers().then((response) => {

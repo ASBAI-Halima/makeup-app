@@ -1,36 +1,37 @@
 <template>
-  <div class="container-products">
-    <!-- ---search ---- -->
-
-    <div class="container-search">
-      <Search :categories="categories" @category="setCategory"  />
-      <Search :prices="prices" @price="setPrice" />
-      <Search :rating="ratingSelect" @rating="setRating" />
-      <!-- <Search :items="prices" @search="handleSearch"/>
-       <Search :items="rating" @search="handleSearch"/> -->
+  <div>
+    <div class="loder" v-if="products == null">
+      <Loder />
     </div>
+    <div class="container-products" v-else>
+      <!-- ---search ---- -->
 
-    <!-- ---products ---- -->
+      <div class="container-search">
+        <Search :categories="categories" @category="setCategory" />
+        <Search :prices="prices" @price="setPrice" />
+        <Search :rating="ratingSelect" @rating="setRating" />
+      </div>
 
-    <div class="containers-products">
-      <link rel="preconnect" href="https://fonts.googleapis.com" />
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-      <link
-        href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&family=Roboto:wght@300&display=swap"
-        rel="stylesheet"
-      />
-      <link
-        rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
-      />
+      <!-- ---products ---- -->
 
-      <Product
-        v-for="product in products"
-        :key="product.id"
-        :product="product"
-      />
+      <div class="containers-products">
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&family=Roboto:wght@300&display=swap"
+          rel="stylesheet"
+        />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
+        />
 
-      
+        <Product
+          v-for="product in products"
+          :key="product.id"
+          :product="product"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -39,16 +40,18 @@
 import { Icon } from "@iconify/vue2";
 import Product from "@/components/Product.vue";
 import Search from "@/components/Search.vue";
+import Loder from "@/components/Loder.vue";
 
 export default {
   components: {
     Icon,
     Product,
     Search,
+    Loder,
   },
   data() {
     return {
-       category: null,
+      category: null,
       price: null,
       rating: null,
       prices: [
@@ -63,7 +66,7 @@ export default {
 
   created() {
     this.$store.dispatch("fetchProducts");
-     this.$store.dispatch("fetchCategories");
+    this.$store.dispatch("fetchCategories");
   },
   computed: {
     products() {
@@ -78,21 +81,39 @@ export default {
             (this.price != null && product.price <= this.price) ||
             this.price == null
         )
-        .filter(
-          (product) =>
+        .filter((product) => {
+          if (
+            this.rating != null &&
+            this.rating != 0 &&
+            product.reviews != null &&
+            product.reviews.length != 0
+          ) {
+            let rate = Math.round(
+              product.reviews.reduce((acc, review) => {
+                if (review.rating != null) acc += review.rating;
+                return acc;
+              }, 0) / product.reviews.length
+            );
+            if (this.rating <= rate) {
+              return product;
+            }
+          } else if (
+            (this.rating != null && product.reviews == null) ||
             (this.rating != null &&
-              product.rating != null &&
-              this.rating == product.rating) ||
+              product.reviews != null &&
+              product.reviews.length == 0) ||
             this.rating == null
-        );
+          ) {
+            return product;
+          }
+        });
     },
-     categories() {
+    categories() {
       return this.$store.state.categories;
-    }
+    },
   },
 
   methods: {
-    
     handleSearch(searchTerm) {
       this.searchResults = [
         ...this.products.filter((item) => {
@@ -117,6 +138,14 @@ export default {
 </script>
 
 <style scoped>
+.loder {
+  width: 100%;
+  height: 80vh;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .container-search {
   display: flex;
   align-items: center;
@@ -126,11 +155,10 @@ export default {
 
   margin-top: 100px;
 }
-@media (max-width: 1260px){
+@media (max-width: 1260px) {
   .container-search {
     display: flex;
     flex-direction: column;
-
   }
 }
 .container-products {

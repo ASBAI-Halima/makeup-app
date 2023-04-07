@@ -1,6 +1,7 @@
 <template>
   <div>
-    <section class="product">
+    <loder v-if="product == null"/>
+    <section class="product" v-else> 
       <div class="product__photo">
         <div class="photo-container">
           <div class="photo-main">
@@ -18,8 +19,32 @@
         <div class="price">
           $ <span>{{ product.price }}</span>
         </div>
-        <div v-if="product.reviews!== null" class="variant">
-          <h3 >rating : {{Math.round(product.reviews.reduce((acc, review) =>{if(review.rating != null)  acc += review.rating; return acc;}  , 0)/product.reviews.length)}}/5</h3>
+        <div v-if="product.reviews !== null" class="variant">
+          <h3>
+            <AwesomeVueStarRating
+              v-if="product.reviews"
+              :star="
+                Math.round(
+                  product.reviews.reduce((acc, review) => {
+                    if (review.rating != null) acc += review.rating;
+                    return acc;
+                  }, 0) / product.reviews.length
+                )
+              "
+              :disabled="this.disabled"
+              :maxstars="this.maxstars"
+              :starsize="this.starsize"
+              :hasresults="this.hasresults"
+              :hasdescription="this.hasdescription"
+              :ratingdescription="this.ratingdescription"
+            />
+            <div class="reviews" v-else>
+              <i class="far fa-star"></i> <i class="far fa-star"></i>
+              <i class="far fa-star"></i> <i class="far fa-star"></i>
+              <i class="far fa-star"></i>
+              <span class="description__rating">(no rating yet)</span>
+            </div>
+          </h3>
         </div>
         <div class="description">
           <h3>Descreption</h3>
@@ -27,7 +52,9 @@
             <p>{{ product.description }}</p>
           </ul>
         </div>
-        <button @click="addItemToCart(product)" class="buy--btn">ADD TO CART</button>
+        <button @click="addItemToCart(product)" class="buy--btn">
+          ADD TO CART
+        </button>
       </div>
     </section>
     <!-- --------- donner un avis ---- -->
@@ -50,30 +77,60 @@ import { mapState } from "vuex";
 import VueRouter from "@/router/index";
 import Review from "@/components/Review.vue";
 import AddReview from "@/components/AddReview.vue";
+import AwesomeVueStarRating from "awesome-vue-star-rating";
+import Loder from '@/components/Loder.vue';
 export default {
   components: {
     Review,
     AddReview,
+    AwesomeVueStarRating,
+    Loder,
   },
   data() {
     return {
       productId: null,
+
+      ratingdescription: [
+        {
+          text: "Poor",
+          class: "star-poor",
+        },
+        {
+          text: "Below Average",
+          class: "star-belowAverage",
+        },
+        {
+          text: "Average",
+          class: "star-average",
+        },
+        {
+          text: "Good",
+          class: "star-good",
+        },
+        {
+          text: "Excellent",
+          class: "star-excellent",
+        },
+      ],
+      hasresults: false,
+      hasdescription: false,
+      starsize: "lg", //[xs,lg,1x,2x,3x,4x,5x,6x,7x,8x,9x,10x],
+      maxstars: 5,
+      disabled: false,
     };
   },
   created() {
     this.productId = this.$route.params.id;
     this.$store.dispatch("fetchProduct", this.productId);
   },
-  computed: 
-   mapState(["product"]),
-    
-    methods :{
-   addItemToCart(product) {
-      
+  computed: mapState(["product"]),
+
+  methods: {
+    addItemToCart(product) {
       if (sessionStorage.getItem("user") != null) {
         this.$store.dispatch("setProductInCart", {
           product: product,
-          id: sessionStorage.getItem("user")
+          id: sessionStorage.getItem("user"),
         });
         VueRouter.push({ name: "cart" });
       } else {
@@ -100,6 +157,13 @@ body {
   display: grid;
   grid-template-rows: 1fr;
   font-family: "Raleway", sans-serif;
+}
+.description__rating {
+  color: #202020;
+
+  margin-left: 0.5rem;
+
+  font-size: 0.7rem;
 }
 
 h3 {

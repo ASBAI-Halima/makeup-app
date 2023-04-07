@@ -223,7 +223,7 @@ export default {
                 user.email +
                 ";expires=Thu, 18 Dec 2025 12:00:00 UTC; path=/";
             }
-            this.$store.dispatch("signIn", user.id);
+            this.$store.dispatch("signIn", {email: user.email, password: user.password});
           }
         });
       }

@@ -24,30 +24,30 @@
               <div class="col-2">
                 <img class="img-fluid" :src="item.imageUrl" alt="" />
               </div>
-              <div class="col">
-                <div class="row text-muted">{{ item.name }}</div>
-                <div class="row">{{ item.category }}</div>
+              <div class="col center">
+                <h2 class="row text-muted">{{ item.name }}</h2>
+                <p class="row">{{ item.category }} category</p>
               </div>
-              <div class="col">
-                <button
+              <div class="col center">
+                <a
                   class="border"
                   @click="update(item, item.quantity - 1, true)"
                 >
                   -
-                </button>
+                </a>
                 <a href="#" class="border">{{ item.quantity }}</a>
-                <button
+                <a
                   class="border"
                   @click="update(item, item.quantity + 1, false)"
                 >
                   +
-                </button>
+                </a>
               </div>
-              <div class="col">
+              <div class="col center">
                 &euro; {{ item.price * item.quantity }}
-                <button @click="removeItem(item)">
+                <a @click="removeItem(item)">
                   <span class="close">&#10005;</span>
-                </button>
+                </a>
               </div>
             </div>
           </div>
@@ -149,10 +149,13 @@ export default {
 </script>
 
 <style scoped>
+a{
+  font-size: 18px;
+}
 .container-cart {
-  margin-top: 20px;
+  margin-top: 50px;
   height: 100%;
-  min-height: 100vh;
+  /* min-height: 100vh; */
   vertical-align: middle;
   display: flex;
   font-family: sans-serif;
@@ -166,7 +169,7 @@ export default {
 .card-cart {
   margin: auto;
   max-width: 950px;
-  width: 90%;
+  width:  80%;
   box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   border-radius: 1rem;
   border: transparent;
@@ -233,6 +236,10 @@ export default {
 .col {
   padding: 0 1vh;
 }
+.center{
+  padding-top: 50px;
+  
+}
 a {
   padding: 0 1vh;
 }
@@ -241,7 +248,8 @@ a {
   font-size: 0.7rem;
 }
 img {
-  width: 3.5rem;
+  width: 6rem;
+   box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .back-to-shop {
   margin-top: 4.5rem;

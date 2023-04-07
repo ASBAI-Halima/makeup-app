@@ -10,22 +10,23 @@
                 </div>
             </div>
             <div class="footer__data">
-               <h2>Our address</h2>
-                <p>123 Wedding Street<br>São Paulo - SP</p>
+               <h2>Our Services</h2>
+                <p>Pricing<br>Discount<br>Shipping mode</p>
             </div>
             <div class="footer__data">
-               <h2>our schedule</h2>
-                <p>Monday to Friday<br>from 09:00 am to 06:00 pm</p>
+               <h2>our Company</h2>
+                <p>Blog<br>About Us<br>Our mission</p>
             </div>
             <div class="footer__data">
                 <h2>Contact</h2>
                 <p>(+212) 11014779</p>
                 <p>(+212) 11014779</p>
+                <p></p>
             </div>
         </div>
         <div class="copy">
-            <p>&copy; All rights reserved</p>
-            <span>Made with 🤎 by MarquesCode</span>
+            <span>&copy; All rights reserved</span>
+            <p>MADE WITH LOVE BY ZARA </p>
         </div>
     </footer>
 </template>
