@@ -1,14 +1,6 @@
 <template>
     <div class="container-products">
-    <!-- ---search ---- -->
-
-    <div class="search-box">
-      <button class="btn-search">
-        <i class="bx bx-search"></i>
-      </button>
-      <input type="text" class="input-search" placeholder="Type to Search..." />
-    </div>
-    
+ 
    
     <div class="containers-products">
       <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -22,7 +14,6 @@
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
       />
       <div>{{cat}}</div>
-      <div v-if="category.length===0">hhhhhhhhhhhhh</div>
       <Product v-for="product in category" :key="product.id" :product="product" v-if="category.length" />
     </div>
   </div>

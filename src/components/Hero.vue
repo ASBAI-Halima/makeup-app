@@ -38,7 +38,7 @@ import 'swiper/css/swiper.css';
 export default {
   mounted() {
     new Swiper('.swiper-container', {
-      slidesPerView: 4,
+      slidesPerView: 2,
       spaceBetween: 5,
       effect: 'coverflow',
       coverflowEffect: {
@@ -53,7 +53,26 @@ export default {
         el: '.swiper-pagination'
       }
     });
+     this.updateSwiper();
+    window.addEventListener('resize', this.updateSwiper);
   },
+ beforeDestroy() {
+    window.removeEventListener('resize', this.updateSwiper);
+  },
+  methods: {
+    updateSwiper() {
+      if (window.matchMedia('(max-width: 768px)').matches) {
+        this.mySwiper.params.slidesPerView = 1;
+        this.mySwiper.params.spaceBetween = 10;
+        this.mySwiper.update();
+      } else {
+        this.mySwiper.params.slidesPerView = 4;
+        this.mySwiper.params.spaceBetween = 5;
+        this.mySwiper.update();
+      }
+    }
+  }
+  ,
   data() {
     return {
       image1: require('@/assets/Hero/image1.jpg'),
@@ -68,14 +87,19 @@ export default {
 <style scoped>
  .swiper-slide {
   margin-top:100px;
-  padding: 30px;
+  padding: 20px;
   height: 70vh;
-  background-color: #ccc;
+  background-color: red;
   display: flex;
   justify-content: center;
   align-items: center;
   animation-duration: 0.5s;
   animation-fill-mode: both;
+}
+@media screen and (max-width:720px){
+  .swiper-slide {
+    height: 40vh;
+  }
 }
 
 .swiper-slide:nth-child(even) {
@@ -113,7 +137,7 @@ export default {
 
 .hero-img {
   max-width: 100%;
-  max-height: 100%;
+  height: 100%;
   animation-duration: 0.5s;
   animation-fill-mode: both;
 }
@@ -149,4 +173,5 @@ export default {
     transform: translateX(0);
   }
 }
+
 </style>

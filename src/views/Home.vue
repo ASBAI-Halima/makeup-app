@@ -1,7 +1,7 @@
 <template>
   <div>
     <Hero />
-    <Welcome />
+    <!-- <Welcome /> -->
     <h2>FeaturedProducts</h2>
     <div class="container-fr-prod">
       <div class="featured-prod" >
@@ -15,7 +15,6 @@
 
 <script>
 // @ is an alias to /src
-import { mapState } from "vuex";
 import Hero from "@/components/Hero.vue";
 import FeaturedProducts from "@/components/FeaturedProducts.vue";
 import WhyUs from "@/components/WhyUs.vue";
@@ -59,5 +58,12 @@ h2 {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   grid-gap: 110px;
+}
+@media screen and (max-width: 616px){
+  .featured-prod{
+    padding-left: 2%;
+    padding-right:2%;
+    width: max-content;
+  }
 }
 </style>

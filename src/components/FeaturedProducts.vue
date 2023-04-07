@@ -96,6 +96,7 @@ body {
 }
 
 .card-hover {
+  
   width: 300px;
   height: 400px;
   border-radius: 10px;
@@ -140,6 +141,7 @@ body {
   transition: all 0.35s 0.35s cubic-bezier(0.1, 0.72, 0.4, 0.97);
   will-change: bottom, background-color, transform, padding;
   z-index: 1;
+
 }
 
 .card-hover__content::before,

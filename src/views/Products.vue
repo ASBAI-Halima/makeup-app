@@ -30,12 +30,7 @@
         :product="product"
       />
 
-      <!-- <div v-else>
-      <Product
-        v-for="product in searchResults"
-        :key="product.id"
-        :product="product"
-      /></div> -->
+      
     </div>
   </div>
 </template>
@@ -44,7 +39,7 @@
 import { Icon } from "@iconify/vue2";
 import Product from "@/components/Product.vue";
 import Search from "@/components/Search.vue";
-import { mapState } from "vuex";
+
 export default {
   components: {
     Icon,
@@ -130,6 +125,13 @@ export default {
   margin: auto;
 
   margin-top: 100px;
+}
+@media (max-width: 1260px){
+  .container-search {
+    display: flex;
+    flex-direction: column;
+
+  }
 }
 .container-products {
   height: 100%;

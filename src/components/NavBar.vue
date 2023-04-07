@@ -97,13 +97,14 @@ export default {
         width: 100%;
     }
     .logo{
-        width: 100px;
+        width:100px;
         height: auto;
     }
     .navbar{
         display: flex;
         align-items: flex-start;
        justify-content: space-between;
+       
     }
     .brand{
         display: flex;
@@ -132,6 +133,7 @@ export default {
     display: block;
     width: 100%;
     height: 100%;
+    
     
     
   }

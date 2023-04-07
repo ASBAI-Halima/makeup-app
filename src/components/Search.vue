@@ -75,11 +75,12 @@ export default {
   display: inline;
   font-weight: 600;
   cursor: pointer;
+  margin: 10px;
 }
 .mydropdown:hover,
 .myoption:active,
 .myoption:checked {
-  border: 2px dotted #da2535;
+  border: 2px groove gray;
 }
 .box select option {
   padding: 30px;
